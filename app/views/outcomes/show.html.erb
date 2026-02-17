@@ -1,0 +1,96 @@
+<div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
+  <div>
+    <h1 class="h3 mb-1"><%= @outcome.title %></h1>
+    <div class="text-muted">
+      <%= link_to @mou.title, mou_path(@mou), class: "text-decoration-none" %>
+    </div>
+  </div>
+  <div class="d-flex gap-2">
+    <%= link_to "Edit", edit_mou_outcome_path(@mou, @outcome), class: "btn btn-outline-secondary" %>
+    <%= button_to "Delete", mou_outcome_path(@mou, @outcome), method: :delete, class: "btn btn-outline-danger", form: { data: { turbo_confirm: "Delete this outcome (and all feedback)?" } } %>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="fw-semibold">Outcome Details</div>
+          <div><%= outcome_status_badge(@outcome) %></div>
+        </div>
+
+        <dl class="row mb-0">
+          <dt class="col-sm-4">Target Date</dt>
+          <dd class="col-sm-8"><%= @outcome.target_date %></dd>
+
+          <dt class="col-sm-4">Responsible</dt>
+          <dd class="col-sm-8"><%= @outcome.responsible_person %></dd>
+
+          <dt class="col-sm-4">Completion Date</dt>
+          <dd class="col-sm-8"><%= @outcome.completion_date || "-" %></dd>
+
+          <dt class="col-sm-4">Description</dt>
+          <dd class="col-sm-8"><%= @outcome.description.present? ? simple_format(@outcome.description) : "-" %></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body d-flex align-items-center justify-content-between">
+        <div class="fw-semibold">Feedback</div>
+        <%= link_to "Add Feedback", new_mou_outcome_feedback_path(@mou, @outcome), class: "btn btn-sm btn-primary" %>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Rating</th>
+              <th>Achievement</th>
+              <th>Reviewed By</th>
+              <th>Date</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @feedbacks.any? %>
+              <% @feedbacks.each do |feedback| %>
+                <tr>
+                  <td class="fw-semibold"><%= feedback.rating %>/5</td>
+                  <td><%= achievement_status_badge(feedback) %></td>
+                  <td><%= feedback.reviewed_by %></td>
+                  <td><%= feedback.review_date %></td>
+                  <td class="text-end text-nowrap">
+                    <div class="d-inline-flex flex-nowrap gap-1">
+                      <%= link_to "Edit", edit_mou_outcome_feedback_path(@mou, @outcome, feedback), class: "btn btn-sm btn-outline-secondary" %>
+                      <%= button_to "Delete", mou_outcome_feedback_path(@mou, @outcome, feedback), method: :delete, class: "btn btn-sm btn-outline-danger", form: { class: "d-inline", data: { turbo_confirm: "Delete this feedback?" } } %>
+                    </div>
+                  </td>
+                </tr>
+                <% if feedback.comments.present? %>
+                  <tr>
+                    <td colspan="5" class="text-muted small">
+                      <div class="px-2 pb-2"><%= simple_format(feedback.comments) %></div>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="5" class="text-muted text-center py-4">No feedback yet.</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3 d-flex gap-2">
+  <%= link_to "Back to MoU", mou_path(@mou), class: "btn btn-outline-secondary" %>
+  <%= link_to "MoUs", mous_path, class: "btn btn-outline-secondary" %>
+</div>

@@ -1,0 +1,44 @@
+<%= form_with model: [mou, outcome, feedback] do |f| %>
+  <% if feedback.errors.any? %>
+    <div class="alert alert-danger">
+      <div class="fw-semibold mb-2"><%= pluralize(feedback.errors.count, "error") %> prevented saving:</div>
+      <ul class="mb-0">
+        <% feedback.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <%= f.label :rating, class: "form-label" %>
+      <%= f.select :rating, (1..5).map { |n| ["#{n}", n] }, {}, class: "form-select", required: true %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :achievement_status, class: "form-label" %>
+      <%= f.select :achievement_status, Feedback.achievement_statuses.keys.map { |k| [k.tr("_", " ").titleize, k] }, {}, class: "form-select", required: true %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :review_date, class: "form-label" %>
+      <%= f.date_field :review_date, class: "form-control", required: true %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.label :reviewed_by, class: "form-label" %>
+      <%= f.text_field :reviewed_by, class: "form-control", required: true %>
+    </div>
+
+    <div class="col-12">
+      <%= f.label :comments, class: "form-label" %>
+      <%= f.text_area :comments, class: "form-control", rows: 3 %>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex gap-2">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", mou_outcome_path(mou, outcome), class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

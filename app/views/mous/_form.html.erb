@@ -1,0 +1,61 @@
+<%= form_with model: mou do |f| %>
+  <% if mou.errors.any? %>
+    <div class="alert alert-danger">
+      <div class="fw-semibold mb-2"><%= pluralize(mou.errors.count, "error") %> prevented saving:</div>
+      <ul class="mb-0">
+        <% mou.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-12">
+      <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title, class: "form-control", required: true %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.label :organization_one, class: "form-label" %>
+      <%= f.text_field :organization_one, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :organization_two, class: "form-label" %>
+      <%= f.text_field :organization_two, class: "form-control", required: true %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.label :department, class: "form-label" %>
+      <%= f.text_field :department, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :start_date, class: "form-label" %>
+      <%= f.date_field :start_date, class: "form-control", required: true %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :end_date, class: "form-label" %>
+      <%= f.date_field :end_date, class: "form-control", required: true %>
+    </div>
+
+    <div class="col-12">
+      <%= f.label :objective, class: "form-label" %>
+      <%= f.text_area :objective, class: "form-control", rows: 3, required: true %>
+    </div>
+
+    <div class="col-12">
+      <%= f.label :terms, class: "form-label" %>
+      <%= f.text_area :terms, class: "form-control", rows: 3, required: true %>
+    </div>
+
+    <div class="col-12">
+      <%= f.label :contact_details, class: "form-label" %>
+      <%= f.text_area :contact_details, class: "form-control", rows: 3, required: true %>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex gap-2">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", mou.persisted? ? mou_path(mou) : mous_path, class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

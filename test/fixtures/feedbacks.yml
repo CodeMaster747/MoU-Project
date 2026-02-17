@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  outcome: one
+  rating: 1
+  comments: MyText
+  reviewed_by: MyString
+  review_date: 2026-02-17
+  achievement_status: 1
+
+two:
+  outcome: two
+  rating: 1
+  comments: MyText
+  reviewed_by: MyString
+  review_date: 2026-02-17
+  achievement_status: 1

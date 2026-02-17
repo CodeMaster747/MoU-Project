@@ -1,0 +1,71 @@
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="h3 mb-0">Dashboard</h1>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Total MoUs</div>
+        <div class="display-6"><%= @total_mous %></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Active MoUs</div>
+        <div class="display-6"><%= @active_mous %></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Pending MoUs</div>
+        <div class="display-6"><%= @pending_mous %></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Expired MoUs</div>
+        <div class="display-6"><%= @expired_mous %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Total Outcomes</div>
+        <div class="display-6"><%= @total_outcomes %></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Completed Outcomes</div>
+        <div class="display-6"><%= @completed_outcomes %></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Average Feedback Rating</div>
+        <div class="display-6">
+          <%= @average_feedback_rating ? number_with_precision(@average_feedback_rating, precision: 2) : "-" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4 d-flex gap-2">
+  <%= link_to "Import Excel", new_import_path, class: "btn btn-primary" %>
+  <%= link_to "View MoUs", mous_path, class: "btn btn-outline-secondary" %>
+  <%= link_to "Analytics", analytics_path, class: "btn btn-outline-secondary" %>
+</div>

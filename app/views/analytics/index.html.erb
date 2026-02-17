@@ -1,0 +1,56 @@
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="h3 mb-0">Analytics</h1>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="fw-semibold mb-3">MoUs per Year</div>
+        <% if @mous_per_year.any? %>
+          <%= column_chart @mous_per_year, height: "300px" %>
+        <% else %>
+          <div class="text-muted">No MoU data yet.</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="fw-semibold mb-3">Outcomes per MoU (Top 10)</div>
+        <% if @outcomes_per_mou.any? %>
+          <%= bar_chart @outcomes_per_mou, height: "300px" %>
+        <% else %>
+          <div class="text-muted">No outcomes yet.</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <div class="fw-semibold mb-3">Average Feedback Rating Over Time</div>
+        <% if @avg_feedback_over_time.any? %>
+          <%= line_chart @avg_feedback_over_time, height: "300px", min: 0, max: 5 %>
+        <% else %>
+          <div class="text-muted">No feedback yet.</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted small">Overall Average Rating</div>
+        <div class="display-6">
+          <%= @average_feedback_rating ? number_with_precision(@average_feedback_rating, precision: 2) : "-" %>
+        </div>
+        <div class="text-muted">Based on all feedback entries.</div>
+      </div>
+    </div>
+  </div>
+</div>

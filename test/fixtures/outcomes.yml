@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mou: one
+  title: MyString
+  description: MyText
+  target_date: 2026-02-17
+  responsible_person: MyString
+  status: 1
+  completion_date: 2026-02-17
+
+two:
+  mou: two
+  title: MyString
+  description: MyText
+  target_date: 2026-02-17
+  responsible_person: MyString
+  status: 1
+  completion_date: 2026-02-17
